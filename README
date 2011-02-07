@@ -10,7 +10,6 @@ So far it only has been built for Cucumber
   s.go
 
   s.data
-
   s.data[:features] #= Hash of Features by filename
 
   s.data["use_case1/features1.feature"] #= Hash with :file and :data
@@ -22,6 +21,6 @@ So far it only has been built for Cucumber
   s.data["use_case1/features1.feature"][:data][:scenarios].first[:steps] #= Array of steps.
 
 
-But, just like my old Physics teacher would say after labouriously explaining something; you don't need to know that.
+But, just like my old Physics teacher would say after laboriously explaining something; you don't need to know that.
 
 The not very fancy html in the views just walks through that and results in some divs which are styled according to the stylesheet.
