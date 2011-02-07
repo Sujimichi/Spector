@@ -1,0 +1,37 @@
+= stylesheet_link_tag 'spector.css', :media => 'screen, projection'
+#spector.grid960
+  %h1 Spector
+  - @data.each do |key, values|
+    .test_type.grid_12
+      %h2= key
+      - values.map{|k,v| [k,v]}.reverse.each do |file, test|
+        .test_file
+          %h3
+            = link_to_function file, "toggle_file(this)"
+          .feature.hidden
+            .tags
+              = test[:data][:main_tags].join
+            .feature_name
+              %h4
+                Feature:
+                = test[:data][:feature]
+            .clear
+            - test[:data][:scenarios].each do |scen|
+              .scenario
+                %h5
+                  Scenario:
+                  = link_to_function scen[:name], "toggle_scenario(this)"
+                .steps.hidden
+                  .grid_10
+                    - scen[:steps].each do |step|
+                      .small= @spector.pretty_step(step).html_safe
+                .clear
+
+:javascript
+  function toggle_file(e){
+    $('.feature').hide('fast');
+    $(e).parents('.test_file').children('.feature').show('slow')
+  };
+  function toggle_scenario(e){
+    $(e).parents('.scenario').children('.steps').toggle('fast');
+  };
