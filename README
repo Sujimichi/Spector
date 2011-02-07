@@ -6,19 +6,19 @@ put the spector folder in the views, spector_controller in controllers and spect
 
 So far it only has been built for Cucumber
 
-  s = Spector.new
-  s.go
+    s = Spector.new
+    s.go
 
-  s.data
-  s.data[:features] #= Hash of Features by filename
+    s.data
+    s.data[:features] #= Hash of Features by filename
 
-  s.data["use_case1/features1.feature"] #= Hash with :file and :data
-  s.data["use_case1/features1.feature"][:data] #= Hash with :main_tags, :feature, :scenarios
-  s.data["use_case1/features1.feature"][:data][:feature] #= string, following Feature: for that file
-  s.data["use_case1/features1.feature"][:data][:main_tags] #= string, with the @tags from above Feature:
-  s.data["use_case1/features1.feature"][:data][:scenarios] #= Array of scenarios
-  s.data["use_case1/features1.feature"][:data][:scenarios].first[:name] #= String following Scenario:
-  s.data["use_case1/features1.feature"][:data][:scenarios].first[:steps] #= Array of steps.
+    s.data["use_case1/features1.feature"] #= Hash with :file and :data
+    s.data["use_case1/features1.feature"][:data] #= Hash with :main_tags, :feature, :scenarios
+    s.data["use_case1/features1.feature"][:data][:feature] #= string, following Feature: for that file
+    s.data["use_case1/features1.feature"][:data][:main_tags] #= string, with the @tags from above Feature:
+    s.data["use_case1/features1.feature"][:data][:scenarios] #= Array of scenarios
+    s.data["use_case1/features1.feature"][:data][:scenarios].first[:name] #= String following Scenario:
+    s.data["use_case1/features1.feature"][:data][:scenarios].first[:steps] #= Array of steps.
 
 
 But, just like my old Physics teacher would say after laboriously explaining something; you don't need to know that.
