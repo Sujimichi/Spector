@@ -1,0 +1,26 @@
+= Spector
+This is a work in progress.
+Aim is to be able to view Cucumber and Rspec tests on a page within the site being built.
+Just incorporate the files into a rails app
+put the spector folder in the views, spector_controller in controllers and spector either in lib or models and the sass in your stylesheets dir.
+
+So far it only has been built for Cucumber
+
+  s = Spector.new
+  s.go
+
+  s.data
+  s.data[:features] #= Hash of Features by filename
+
+  s.data["use_case1/features1.feature"] #= Hash with :file and :data
+  s.data["use_case1/features1.feature"][:data] #= Hash with :main_tags, :feature, :scenarios
+  s.data["use_case1/features1.feature"][:data][:feature] #= string, following Feature: for that file
+  s.data["use_case1/features1.feature"][:data][:main_tags] #= string, with the @tags from above Feature:
+  s.data["use_case1/features1.feature"][:data][:scenarios] #= Array of scenarios
+  s.data["use_case1/features1.feature"][:data][:scenarios].first[:name] #= String following Scenario:
+  s.data["use_case1/features1.feature"][:data][:scenarios].first[:steps] #= Array of steps.
+
+
+But, just like my old Physics teacher would say after laboriously explaining something; you don't need to know that.
+
+The not very fancy html in the views just walks through that and results in some divs which are styled according to the stylesheet.
