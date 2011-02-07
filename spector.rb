@@ -2,13 +2,8 @@ class Spector
   #require File.expand_path("../../config/environment", __FILE__)
   attr_accessor :files, :data
   def initialize
-    @paths = {
-      :spec => 'rb',
-      :features => 'feature'
-    }
-    #key is path, value is extention
+    @paths = {:spec => 'rb', :features => 'feature' } #key is folder name in rails root, value is file extention for that test type
     @files = {}
-    #@initial_dir = Dir.getwd
   end
 
   def go
@@ -17,14 +12,11 @@ class Spector
     process_files
     process_data
     return @data
-#    raise @data.inspect
-    #Dir.chdir(@initial_dir)
   end
 
   #build a list of the files
   def list type
-    @root = Rails.root
-    Dir.chdir("#{@root}/#{type.to_s}")
+    Dir.chdir("#{Rails.root}/#{type.to_s}")
     @files[type] = Dir.glob("**/*.#{@paths[type]}")
   end
 
@@ -40,6 +32,7 @@ class Spector
     end
   end
 
+
   #for each type (:feature, rspec), for each file, examine file and update @data hash with results
   def process_data
     @data.each do |t, files|
@@ -53,9 +46,9 @@ class Spector
         @data[t][path] = {:file => "", :data  => @nd}
       end
     end
-
   end
 
+  #Cucumber Process Line
   #Called on each line of each file.  Decide what action to take depending on the contents on the line
   def process_line line
     if line.include?("@") && @add_tags_to_main
@@ -73,12 +66,10 @@ class Spector
       rescue
       end
     end
-
-
   end
 
+  #replaces certain key words in steps with class divs to given syntax highlighting
   def pretty_step step
-
     step.sub!("Given", "<div class='spector-keyword'>Given</div>")
     step.sub!("When", "<div class='spector-keyword'>When</div>")    
     step.sub!("Then", "<div class='spector-keyword'>Then</div>")          
@@ -89,26 +80,5 @@ class Spector
     step = step.split("\"").in_groups_of(2).map{|a,b| b.nil? ? a : "#{a}<div class='spector-quote'>\"#{b}\"</div>"}.join
     step
   end
-
-  #print to screen just the Features and Scenario headers
-  def cuke
-    cuke = []
-    @data[:features].each do |p, d|
-      cuke << d[:data][:feature]
-      d[:data][:scenarios].each do |s|
-        cuke << s[:name]
-      end
-    end
-    puts cuke
-    cuke
-  end
 end
 
-=begin
-
-s = Spector.new
-s.go
-s.process_files
-s.process_data
-
-=end
