@@ -1,11 +1,19 @@
 = Spector
 This is a work in progress.
+
 Aim is to be able to view Cucumber and Rspec tests on a page within the site being built.
+
+The Spector class will read the test files and form a data set that can be displayed in the views.
+
 Just incorporate the files into a rails app
-put the spector folder in the views, spector_controller in controllers and spector either in lib or models and the sass in your stylesheets dir.
+Put the spector folder in the views,
+spector_controller in controllers,
+spector either in lib or models
+and the sass in your stylesheets dir.
 
 So far it only has been built for Cucumber
 
+The data formed is structured like this.
   s = Spector.new
   s.go
 
